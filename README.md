@@ -93,7 +93,7 @@ Dari analisis risiko atas terjadinya kesalahan prediksi, diperoleh kerugian yang
 
 Pada bagian ini., kita melakukan import libraries yang diperlukan untuk melakukan analisis dan membangun model.
 
-A. Data Information
+**Data Information**
 
 Selanjutnya, kita melakukan eksplor informasi umum mengenai dataset yang kita punya, yaitu sebagai berikut.
 **Dataset source:**
@@ -148,250 +148,27 @@ Dari sumber : [https://www.sciencedirect.com/science/article/pii/S23523409183151
 
 Dari eksplorasi tersebut, kita mendapatkan beberapa keterangan yang menunjukkan anomali data, seperti adanya nilai negatif pada kolom ADR, kemudian adanya missing values, tipe data yang tidak sesuai, yang bisa dihandle pada bagian data cleaning.
 
-Data Cleaning
 
- Handle Missing Values
-Pada bagian data cleaning, kita akan menghandle missing values dengan mengisi kolomnya ataupun dengan menghapus data yang ada berdasarkan informasi yang diterima.
-- Missing values pada kolom children akan didrop karena tidak ada keterangan mengenai missing values tersebut dan missing valuesnya hanya 0,003% dari keseluruhan data.
-- Missing values pada kolom country juga akan didrop karena tidak ada keterangan mengenai data yang missing tersebut, sehingga apabila diisi dikhawatirkan akan menimbulkan bias pada data.
-- Missing values pada kolom agent kita isi dengan 0, yang artinya orang tersebut memesan kamar tidak melalui agen. Hal ini didasari oleh informasi pada sumber [https://www.sciencedirect.com/science/article/pii/S2352340918315191](https://www.sciencedirect.com/science/article/pii/S2352340918315191).
-- Berdasarkan sumber yang sama dengan yang di atas, missing values pada kolom company kita isi juga missing valuesnya dengan 0, yang artinya tamu tersebut tidak berkaitan dengan suatu perusahaan tertentu
-
-Data Correction
-
-Pada bagian ini, kita memperbaiki tipe data yang tidak sesuai dan mengubah isi kolom yang tidak sesuai berdasarkan informasi atau pengetahuan yang dimiliki.
-- Mengubah tipe kolom reservation_status_date dari object menjadi datetime
-- Mengubah tipe kolom children dari float menjadi integer karena kolom tersebut menunjukkan banyak anak yang akan menginap, sehingga tidak mungkin nilainya berupa desimal.
-- Mengubah isi ‘Undefined’ pada kolom meal dengan SC, karena berdasarkan sumber [https://www.sciencedirect.com/science/article/pii/S2352340918315191](https://www.sciencedirect.com/science/article/pii/S2352340918315191), Undefined di sini sama dengan tamu tersebut tidak memesan paket makan (SC)
-- Menghapus data dengan isi ‘Undefined’ pada kolom distribution_channel karena tidak ada sumber yang menerangkan maksud dari Undefined pada kolom ini. Di samping itu, persentase jumlah data yang memiliki isi Undefined juga sangat kecil, sehingga data tersebut kita drop.
-Duplicate
-
-Pada bagian ini, kita akan mengecek apakah terdapat data duplikat di dataset kita. Ternyata setelah dicek, terdapat data duplikat, sehingga data duplikat tersebut akan kita drop.
-
-Anomaly Data
-
-Pada bagian ini, kita akan meng-handle data-data yang tidak logis atau anomali.
-- Terdapat nilai negatif pada kolom ADR, dimana ADR adalah rata-rata harga per kamar per hari yang tidak mungkin negatif. Dengan demikian, data dengan nilai negatif pada kolom ADR kita drop.
-- Nilai 0 pada kolom adults artinya tidak ada orang dewasa yang ikut menginap, dimana menurut regulasi secara umum, yang boleh reservasi ataupun check-in hanyalah orang dewasa yang berumur 17 atau 18 tahun, sehingga kasus ini tidak mungkin terjadi. Jadi, data yang memiliki nilai 0 pada kolom adults kita drop.
-- Nilai yang lebih besar dari 365 hari pada kolom lead_time, yang artinya jarak antara waktu booking dengan waktu kedatangan lebih dari 1 tahun. Secara umum, hotel memperbolehkan pelanggan untuk membooking hotel maksimal dari 1 tahun sebelumnya. Dengan demikian, nilai lead_time yang lebih besar dari 365 hari akan didrop.
-- Nilai ADR 0 pada segmen pasar selain complementary artinya ada segmen pasar lainnya selain orang-orang yang ditunjuk sebagai promotor yang tidak membayar kamar hotel, dimana ini adalah anomali, sehingga data yang memiliki ADR 0 pada segmen pasar selain complementary akan kita drop.
-
-Outliers
-Pengecekan outliers dilakukan untuk kolom numerik. Pada bagian ini, kita akan drop data yang merupakan outliers ekstrem, seperti pada kolom ADR yang bernilai lebih dari 5000, kolom children dan babies yang nilainya lebih dari 7, dan kolom requires_car_parking_spaces yang lebih dari 7.
-
-EDA
-
-EDA pada proyek ini difokuskan untuk melakukan Diagnostic Analysis dimana kita akan menganalisa faktor-faktor, behaviour pelanggan, serta pola yang mempengaruhi pembatalan pemesanan hotel terhadap kolom `is_canceled` sebagai variabel target. Analisis ini membantu kita dalam mengidentifikasi insight penting yang nantinya menjadi dasar untuk melakukan pembangunan model Machine Learning menjadi lebih akurat. Berikut pendekatan analisa yang akan kita lakukan.
-
-Kita cek persentase jumlah kolom target. Diperoleh bahwa data target imbalanced karena persentase jumlah data target atas tamu yang tidak membatalkan pesanan sebesar 72,3% dan yang membatalkan pesanan sebesar 27,7%.
-Kita analisis behaviour tamu
-- Keputusan pembatalan pelanggan berdasarkan tipe hotel
-
-Berdasarkan grafik di atas, pada City Hotel presentase pembatalan yang dilakukan oleh tamu lebih tinggi dibandingkan dengan presentase pembatalan pada Resort Hotel
-
-- Keputusan pembatalan pelanggan berdasarkan bulan kedatangan
-
-Selama periode Juli 2015- Agustus 2017 Total reservasi tertinggi terjadi pada bulan Juli dan Agustus, yang mana pada bulan-bulan tersebut masuk pada musim panas
-
-- Keputusan pembatalan pelanggan berdasarkan pilihan paket makan
-
-
-Paket makan SC memiliki tingkat pembatalan tertinggi yaitu sebesar 35%. Paket makan BB, FB, HB cenderung lebih stabil dengan pembatalan di bawah 30%. Tamu yang tidak memilih paket makan (SC) kemungkinan mengalami ketidakpastian dalam perencanaan.
-
-- Keputusan pembatalan pelanggan berdasarkan Segmen Pasar
- 
-Market segment Online TA memiliki tingkat pembatalan tertinggi sebesar 35.6%, diikuti oleh Groups (26.6%) dan Aviation (19.8%). Hal ini menunjukkan bahwa tamu yang memesan melalui agen perjalanan online lebih cenderung sering melakukan pembatalan dibandingkan segmen lainnya. Kemungkinan penyebabnya adalah fleksibilitas pembatalan, kemudian pada segmentasi Groups mungkin dipengaruhi oleh perubahan jadwal acara, dan Aviation bisa terkait dengan perubahan jadwal penerbangan.
-
-- Keputusan pembatalan pelanggan berdasarkan saluran pemesanan
-
-
-Tamu yang melakukan pemesanan melalui agen perjalanan (TA/TO) memiliki tingkat pembatalan tertinggi (31.2%) dibandingkan dengan saluran distribusi lainnya. kemungkinan hal ini disebabkan oleh kebiasaan pelanggan yang lebih cenderung membandingkan opsi lain sebelum mengonfirmasi pemesanan. sedangkan, pemesanan langsung (14.9%), corporate (13.1%), dan GDS (20.3%) memiliki tingkat pembatalan lebih rendah.
-
-- Keputusan pembatalan pelanggan berdasarkan tipe pembayaran deposit
-
-
-Tamu yang memilih tipe No Deposit memiliki presentase pembatalan sebesar 27%, dan tipe Refundalbe memiliki presentase pembatalan sebesar 24%. tipe Non-Refundable seharusnya mengurangi pembatalan karena tamu sudah membayar di muka, justru data menunjukkan bahwa 93.8% dari pemesan dengan metode ini tetap melakukan pembatalan.
-
-- Keputusan pembatalan pelanggan berdasarkan status tamu tersebut adalah tamu reguler atau bukan
-
-
-
-Tamu reguler sangat kecil potensinya melakukan pembatalan (hanya 8%) sedangkan tamu-tamu baru yang bukan tamu reguler memiliki potensi pembatalan sebesar 28%.
-
-- Keputusan pembatalan pelanggan berdasarkan tipe pelanggan
-
-
-Tipe pelanggan Transient memiliki tingkat pembatalan paling tinggi yaitu sebesar 30,3%, sedangkan untuk tipe customer Group (7%) dan Contract (16%) lebih jarang membatalkan. Pelanggan Transient lebih fleksibel dalam membatalkan dibanding Contract atau Group.
-
-- Keputusan pembatalan pelanggan berdasarkan kebutuhan jumlah space parkir
-
-
-
-Berdasarkan permintaan parking space, sebanyak 30% pembatalan dilakukan oleh tamu yang tidak meminta parking space, sedangkan tamu yang meminta parking space mereka adalah tamu yang tidak pernah melakukan pembatalan pemesanan.
-
-- Keputusan pembatalan pelanggan berdasarkan total permintaan khusus
-
-
-
-Tamu-tamu yang memiliki permintaan khusus memiliki komitmen tinggi dengan pesanannya.  Terbukti bahwa semakin banyak permintaan khusus, pembatalan yang terjadi semakin sedikit.
-
-- Keputusan pembatalan pelanggan berdasarkan menginap bersama anak atau tidak
-
-Untuk menganalisis ini, kita membuat satu kolom baru yang menunjukkan apakah mereka datang bersama anak atau tidak, dengan jika ada minimal 1 bayi dan/atau 1 anak-anak, maka mereka membawa anak. Jika jumlah bayi dan anak-anaknya keduanya nol, artinya mereka tidak membawa anak.
-
-
-
-Presentase tamu yang membawa anak (has_children = 1) cenderung lebih tinggi untuk melakukan pembatalan pemesanan yaitu sebesar 34.5%, dibandingkan dengan tamu yang tidak membawa anak (has_children = 0) dengan presentase pembatalan sebesar 27%.
-
-- Keputusan pembatalan pelanggan berdasarkan perubahan pada pemesanan
-
-Untuk menganalisis hal ini, kita buat kategori sebagai berikut.
-- Tidak ada perubahan artinya nilai booking_changes = 0
-- Jarang melakukan perubahan untuk nilai booking_changes = 1 sampai 2
-- Frekuensi melakukan perubahan sedang untuk nilai booking_changes = 3 sampai 5
-- Sering melakukan perubahan untuk nilai booking_changes = 6 sampai 10
-- Sangat sering melakukan perubahan untuk nilai booking_changes lebih dari 10
-
- 
-
-Semakin sedikit perubahan pada pemesanan maka semakin tinggi presentase pembatalannya
-
-- Keputusan pembatalan pelanggan berdasarkan pernah tidaknya pelanggan membatalkan pesanan sebelumnya
-
-Untuk menganalisis hal ini, kita akan menambah kolom baru yang menunjukkan apakah pelanggan tersebut sebelumnya pernah membatalkan pesanan atau tidak dengan :
-- 1 : pelanggan pernah membatalkan pemesanan
-- 0 : pelanggan belum pernah membatalkan pemesanan
-Pelanggan yang pernah membatalkan pemesanan, nilai pada kolom previous_cancellations akan lebih dari 0, sedangkan yang belum pernah membatalkan pemesanan, nilai pada kolom previous_cancellations akan sama dengan 0.
-
-
-Tamu yang sebelumnya pernah melakukan pembatalan pemesanan cenderung lebih tinggi persentase tingkat pembatalannya yaitu sebesar 67.9% dibandingkan dengan tamu yang belum pernah melakukan pembatalan pemesanan pada pemesanan sebelumnya yang mana tingkat pembatalannya hanya sebesar 27%.
-
-- Keputusan pembatalan pelanggan berdasarkan lama waktu menginap di hari Senin-Jumat
-
-
-
-Median lama waktu menginap di antara hari Senin-Jumat untuk tamu yang membatalkan pemesanannya  lebih tinggi daripada median lama waktu menginap untuk tamu yang tidak membatalkan pemesanannya. Mayoritas tamu yang membatalkan pemesanannya adalah yang lama waktu menginapnya 3 malam, sedangkan yang tidak membatalkan pemesanannya adalah yang lama waktu menginapnya hanya 2 malam.
-
-- Keputusan pembatalan pelanggan berdasarkan jarak waktu pemesanan hingga tanggal kedatangan
-
-
-
-- Tamu yang melakukan pembatalan pemesanan adalah mayotitas mereka adalah yang jarak waktu pemesanan sampai waktu kedatangan adalah 79 hari.
-- Tamu yang tidak melakukan pembatalan pemesanan mayoritas mereka adalah yang jarak waktu pemesanan sampai waktu kedatangan adalah 38 hari.
-
-- Keputusan pembatalan pelanggan berdasarkan ADR (harga rata-rata per kamar per hari)
-
-
-
-- Tamu yang melakukan pembatalan pemesanan mayoritas dari mereka adalah yang harga kamarnya 110 Euro
-- Tamu yang tidak melakukan pembatalan pemesanan mayoritas dari mereka adalah yang harga kamarnya adalah 95 Euro
-Tamu yang melakukan pembatalan pemesanan memiliki median ADR yang lebih tinggi dari pada tamu yang melakukan pembatalan
-
-- Keputusan pembatalan pelanggan berdasarkan asal negara
-
-Untuk menganalisis hal ini, kita akan membuat satu kolom baru yang menunjukkan apakah tamu ini berasal dari dalam negeri, artinya berasal dari Portugal, ataukah berasal dari luar negeri atau berasal dari luar Portugal. Kolom tersebut kita namakan is_local. Isi dari kolom is_local adalah :
-- 1 : tamu berasal Portugal (dari dalam negeri)
-- 0 : tamu berasal dari luar Portugal (dari luar negeri)
-
-
-Dari pie chart di atas, diperoleh tamu yang berasal dari Portugal lebih banyak daripada tamu yang berasal dari luar Portugal
-
-Membangun Model
-
-Data Correlation and Features Selection
-Setiap hubungan baik data kategorik maupun numerik terhadap kolom target (is_canceled). Pada kolom numerik menggunakan heatmap terhadap kolom is_canceled. Sedangkan untuk kolom kategorik menggunakan metode chi-square dimana bila p-value < 0.05 maka kolom tersebut memiliki pengaruh terhadap kolom is_canceled.
-Korelasi pada kolom numerik terhadap kolom target.
-
-Diperoleh kolom numerik yang akan dijadikan feature adalah :
-
-1. required_car_parking_spaces
-2. is_local
-3. total_of_special_requests
-4. cancellations_before
-5. adr
-6. lead_time
-
-Hal ini dikarenakan nilai korelasi untuk fitur-fitur tersebut dengan kolom target (`is_canceled`) lebih dari 10%
-
-Korelasi kolom kategorik terhadap kolom target
-
-Kolom reserved_room_type akan didrop dari fitur karena hanya menunjukkan jenis kamar yang dipesan, sedangkan assigned_room_type lebih relevan karena mencerminkan jenis kamar yang benar-benar diterima oleh tamu. Oleh karena itu, analisis akan difokuskan pada kamar yang sebenarnya didapatkan
-Kolom company akan didrop dari feature karena sekitar 94% pelanggan adalah yang tidak berkaitan dengan perusahaan tertentu.
-Kolom reservation_status akan didrop dari feature karena kolom ini menggambarkan kolom is_canceled.
-Kolom country akan dihapus karena telah digantikan oleh kolom is_local, yang secara langsung merepresentasikan apakah tamu berasal dari dalam atau luar negeri. Hal ini dilakukan untuk menyederhanakan analisis tanpa kehilangan informasi penting.
-Kolom is_canceled merupakan kolom target, sehingga tidak dijadikan fitur
-
-Kolom-kolom yang bersifat kategorik yang akan dijadikan feature adalah :
-hotel
-arrival_date_month
-meal
-market_segment
-distribution_channel
-assigned_room_type
-deposit_type
-agent
-customer_type
-booking_change_category
-
-Modeling
-Preprocessing
+3. Modeling
+## Preprocessing
 Pada proses ini, hal yang perlu kita lakukan adalah, 
 Menentukan kolom fitur dan target
 Dimana kolom x adalah fitur, dan kolom y adalah target (is_canceled)
-Split data
+## Split data
 Data dibagi menjadi data train dan terest dengan perbandingan data train dan data test yaitu 80% : 20%.
-Skema Preprocessing
+## Skema Preprocessing
 Pada tahap ini, perlu dilakukannya feature engineering dimana kolom fitur akan dilakukan proses encoding dan scalling bergantung pada tipe kolom fitur tersebut.
-One Hot Encoding
+- One Hot Encoding
 Kolom yang dilakukan proses dengan OHE adalah kolom 'hotel', 'meal', 'distribution_channel', 'deposit_type', 'customer_type'.
-Binary Encoding
+- Binary Encoding
 kolom yang dilakukan proeses Binary Encoding adalah 'market_segment',  'assigned_room_type',  'agent', 'arrival_date_month', 'booking_change_category'
-Robust Scaler
-Kolom yang di
+- Robust Scaler
+Kolom yang di scaling adalah  'lead_time','adr','required_car_parking_spaces','total_of_special_requests'
 
-Model
-Pada proyek  ini, kita akan memprediksi seorang tmau akan membatalkan pesanan atau tidak. Maka dari itu, model yang digunakan adalah model klasifikasi.
-Pipeline
-Proses ini dilakukan untuk melihat f2 score jika data tidak diseimbangkan lebih dulu, mengingat data target yang jumlahnya tidak seimbang.
+### Model
+Pada proyek  ini, kita akan memprediksi seorang tmau akan membatalkan pesanan atau tidak. Maka dari itu, model yang digunakan adalah model klasifikasi.  Diperoleh hasil terbaik pada model _**XG Boost with Random Under Sampler**_ terhadap data uji dengan nilai F2-Score sebesar 78,6%.
 
-Metode Balancing pada Target
-	Balancing dilakukan untuk menyeimbangkan data target. Metode yang dilakukan seperti gambar dibawah ini. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-		Kemudian model ini juga diproses dengan Pipeline dan memperoleh.
-
-Dari perbandingan model dengan balancing, diperoleh lima model dengan rata-rata F2 score tertinggi, yaitu:
-XG Boost dengan metode balancing Random Under Sampler
-Gradient Boost dengan metode balancing BorderlineSMOTE
-Gradient Boost dengan metode balancing Random Under Sampler
-XG Boost dengan metode balancing Random over Sampler
-Gradient Boost dengan metode balancing ADASYN
-Hyperparameter Tuning
-Model dengan nilai rata-rata F2 score tertinggi yang disebutkan sebelumnya, dilakukan tuning menggunakan RandomizedSearch dan menggunakan Cross Validation. Kemudian diperoleh hasil sebagai berikut.
-
-
-
-
-Prediksi Data Uji
-Dari hasil hyperparameter tuning, dipilih model Gradient Boost dengan metode balancing Border Line Smote karena model tersebut memiliki f2 score tertinggi. Diperoleh f2 score dengan model Gradient Boosting dengan metode Borderline SMOTE tanpa hyperparameter tuning adalah 0,78.
-
-Confusion Matrix
-	
-Model sangat baik dalam mendeteksi pembatalan (F-2 Score tinggi). Cocok untuk kasus di mana gagal mendeteksi pembatalan (FN) lebih rendah nilainya daripada kesalahan memprediksi batal yang tidak terjadi (FP).
-
-
-Limitasi Model
+## Limitasi Model
 Model ini terbatas hanya jika informasi yang diketahui adalah : 
 'hotel'
 'lead_time'
