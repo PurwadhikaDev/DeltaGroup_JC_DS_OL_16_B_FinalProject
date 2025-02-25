@@ -1,0 +1,540 @@
+PREDIKSI PEMBATALAN PEMESANAN KAMAR HOTEL
+
+Oleh :
+
+
+*   Irfan Maulana Yusuf
+*   M. Amin Zakaria
+*   Siti Andriana Rahmayanti
+
+
+### **A. Stakeholder**
+
+
+* Pihak manajemen Hotel
+
+### **B. Context**
+
+
+Industri pelayanan dan pariwisata merupakan sektor penting yang menunjang ekonomi global. Industri ini memberikan pendapatan, membuka lapangan kerja dan menstimulus perkembangan ekonomi di berbagai wilayah. Berbagai perusahaan pada industri ini memiliki karakteristik tertentu seperti pada makanan yang disajikan, akomodasi yang ada, hiburan sampai rekreasi yang diberikan. Karakteristik tersebut menjadikan tiap wilayah atau tempat memiliki daya tarik tersendiri bagi pada turis (Sampaio dkk, 2024. https://doi.org/10.3390/).
+
+Industri pariwisata sangat sensitif terhadap perubahan sedangkan turis cenderung untuk menghindari risiko. Turis akan lebih memilih datang ke wilayah yang aman, bersih, tidak ada wabah tertentu dan memiliki iklim cuaca yang mudah diterima para turis. Di sisi lain, turis juga mempertimbangkan biaya yang diperlukan dari segi akomodasi, seperti harga tiket pesawat, hotel hingga perbandingan kurs mata uang dan juga fasilitas di tiap wilayah yang akan mereka kunjungi. Hal ini membuat para pelaku bisnis pariwisata melakukan berbagai strategi untuk memenuhi ekspektasi para turis untuk datang ke tempat mereka. 
+
+Negara-negara Eropa masih menjadi tempat destinasi yang banyak dikunjungi para turis, salah satunya Portugal. Berdasarkan 2018 Annual Research yang dilakukan oleh World Travel & Tourism Council, tercatat bahwa sektor pariwisata memberikan kontribusi GDP hingga 17% pada 2017 (https://wttc.org/research/economic-impact) yang menandakan bahwa Portugal menjadi salah satu negara favorit yang dikunjungi para turis. Menariknya, Portugal banyak melakukan pengembangan infrastruktur untuk pariwisata mulai dari transportasi, kebijakan politik yang mempengaruhi pariwisata negara, hingga pengembangan akomodasi seperti villa dan hotel.
+
+Hotel merupakan salah satu daftar penting dari para turis sebagai syarat untuk melakukan wisata. Pilihan hotel di suatu negara akan mempengaruhi minat para turis untuk berkunjung, seperti menentukan hotel di tengah kota atau di pinggir laut. Pelaku bisnis perhotelan tentu akan memberikan banyak opsi menarik kepada para turis. Tantangannya adalah bagaimana pendekatan yang dilakukan pelaku bisnis ini agar sesuai dengan minat para turis. Pasalnya, tidak sedikit hotel di wilayah yang banyak disinggahi turis mengalami pembatalan yang membuat pendapatan turun hingga 20% dari forecast. (https://wttc.org/research/economic-impact)
+
+Masalah pembatalan yang dihadapi oleh pelaku bisnis perhotelan tentu perlu dilakukan pendekatan seperti survey, kuisioner, observasi, atau melakukan analisa dengan membuat pemodelan. Pemodelan yang dimaksud adalah membangun model _Machine Learning_ menggunakan data yang ada, yang nanti nya mampu memprediksi kemungkinan pembatalan atas setiap transaksi yang dilakukan oleh para pelanggan. Pendekatan ini sudah banyak dilakukan di berbagai sektor bisnis dan menunjukkan hasil yang signifikan dapat membantu sesuai dengan masalah yang dihadapi. Maka dari itu, pendekatan dengan Machine Learning diharapkan mampu menyelesaikan masalah  terkait pembatalan transaksi yang dihadapi pelaku bisnis perhotelan.
+
+
+### **C. Problem Statement**
+
+
+Potensi terjadinya pembatalan pemesanan kamar menimbulkan dampak negatif bagi industri perhotelan, terutama dari segi pendapatan dan biaya. Hal ini dikarenakan pihak hotel harus menjamin ketersediaan kamar yang sesuai dengan ekspektasi calon penghuni kamar dan harus menanggung biaya atas kekosongan kamar tersebut. Pihak manajemen hotel berupaya untuk memperkecil peluang adanya pembatalan pemesanan sehingga dapat memaksimalkan resources yang ada. 
+
+Dalam penyelesaiannya, penggunakan teknologi Machine Learning menjadi solusi yang potensial untuk memprediksi pembatalan pemesanan para pelanggan. Teknologi ini mmampu menganalisa pola data yang kompleks hingga dapat membantu pihak manajemen membangun model yang secara prediksi lebih akurat dibanding pendekatan konvesional (survey, kuisioner, observasi lapangan, etc.). Apalagi, model ini mampu mengolah data secara besar sehingga dapat efisien dalam mengidentifikasi pola serta faktor utama yang mempengaruhi pembatalan.
+
+Maka dari itu, proyek ini harus mampu menjawab pertanyaan berikut.
+1. Apa saja faktor utama yang mempengarhui kemungkinan pemesanan dibatalkan?
+2. Bagaimana customer behaviour para pelanggan dalam menentukan melakukan pembatalan atau tidaknya pemesanan hotel?
+3. Seberapa jauh model yang dibangun dapat memprediksi pembatalan pemesanan secara akurasi?
+4. Apakah pendekatan dengan Machine Learning mampu meningkatkan akurasi dalam memprediksi pembatalan pesanan pada industri perhotelan dibanding pendekatan konvensional?
+
+
+
+### **C. Goals**
+
+1. Mengetahui dan memahami faktor utama yang mempengaruhi pembatalan pesanan sehingga mampu menurunkan potensi pembatalan dari pemesanan hotel 
+2. Memahami customer behaviour para pelanggan sehingga mampu membuat strategi yang sesuai dengan minat para pelanggan
+3. Model ini mampu memiliki akurasi prediksi di atas 50% dari pembangunan model dengan data yang tersedia. Faktor-faktor yang memicu adanya pembatalan nantinya akan dapat dihindari atau diminimalisir sehingga dapat mengoptimalkan resources dan revenue yang didapatkan.
+4. Model ini diharapakan mampu melakukan prediksi lebih baik dibanding pendekatan secara konvensional. Harapannya model ini juga dapat digunakan dengan data-data ditahun yang akan datang sehingga mampu memprediksi lebih akurat.
+
+### **D. Analytical Approach**
+
+
+Analisa minat pelanggan terhadap perminataan hotel membutuhkan pendekatan analitis untuk mengetahui tren, forecast, dan memahami faktor apa saja yuang mempengaruhi customer behavior para pelanggan. Berikut pendekatan yang akan dilakukan pada proyek ini.
+1. Descriptive Analysis: Merangkum data historik guna mengidentifikasi pola minat yang ada.
+2. Diagnostic Analysis: Melakukan investigasi terhadap fluktuasi permintaan hotel dengan melakukan visualisasi dan korelasi antar variabel.
+3. Predictive Analytics: Melakukan pemodelan untuk memberikan forecast permintaan hotel kedepannya dengan data yang ada menggunakan model klasifikasi. Penggunaan model klasifikasi karena kita akan memprediksi output berupa data kategorikal secara kualitatif (Batal atau Tidak)
+
+### **E. Target**
+
+
+Kolom yang menjadi target adalah kolom 'is_canceled':
+* 0 : pemesanan tidak dibatalkan
+* 1 : pemesanan dibatalkan
+
+**Metric Evaluation**
+
+
+![confusion matrix.png](data:image/png;base64,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)
+
+Analisis Kesalahan Prediksi:
+
+Tipe 1 : *False Positive* (FP)
+Jika yang terjadi adalah FP, dimana model memprediksi pemesanan dibatalkan padahal aktualnya pemesanan tidak dibatalkan, maka risiko yang diterima oleh pihak hotel adalah:
+* marketing yang tidak tepat sasaran, sehingga mengeluarkan biaya marketing yang sia-sia
+
+Tipe 2 : *False Negative* (FN)
+Jika yang terjadi adalah FN, dimana model memprediksi pemesanan tidak dibatalkan padahal aktualnya pemesanan dibatalkan, maka risiko yang diterima oleh pihak hotel adalah:
+* kehilangan pendapatan
+* sia-sianya biaya, waktu, dan sumber daya untuk merealisasikan ekspektasi calon penghuni
+
+Analisis *Metric* yang Akan Digunakan:
+
+Dari analisis risiko atas terjadinya kesalahan prediksi, diperoleh kerugian yang lebih besar akan diterima oleh pihak hotel jika terjadi kesalahan prediksi tipe 2, yaitu *False Negative* (FN), dimana model memprediksi pemesanan tidak dibatalkan padahal aktualnya pemesanan dibatalkan. Oleh karena itu, untuk mereduksi terjadinya kesalahan prediksi tersebut, digunakan *metric F2 Score*.
+
+*F2 Score* adalah salah satu metric yang menitikberatkan pada nilai recall daripada precision. *Metric* ini digunakan jika mereduksi FN menjadi prioritas tanpa meninggalkan FP. Rumus *F2 Score* :
+
+![image.png](attachment:image.png)
+
+
+2. Data Understanding
+
+Pada bagian ini., kita melakukan import libraries yang diperlukan untuk melakukan analisis dan membangun model.
+
+A. Data Information
+
+Selanjutnya, kita melakukan eksplor informasi umum mengenai dataset yang kita punya, yaitu sebagai berikut.
+**Dataset source:**
+[https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand/data](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand/data)
+
+
+**Notes:**
+
+Dari sumber : [https://www.sciencedirect.com/science/article/pii/S2352340918315191](https://www.sciencedirect.com/science/article/pii/S2352340918315191), diperoleh:
+* Dataset ini diambil dari data asli, sehingga identitas pribadi dihapus dari dataset untuk menjaga privasi
+* Dataset ini diambil dari data pemesanan hotel yang diterima antara tanggal 1 Juli 2015 sampai dengan 31 Agustus 2017, termasuk pemesanan yang berhasil dan dibatalkan
+* Dataset ini memiliki 32 kolom dan 119.390 baris dengan sebanyak 79.330 data dari pemesanan di City Hotel dan 40.060 data dari pemesanan di Resort Hotel
+* Dataset ini diambil dari hotel yang berada di Portugal dengan Resort Hotel yang berada di wilayah Algarve dan City Hotel yang berada di Kota Lisbon.
+* Property Management System (PMS) memastikan tidak ada data yang hilang (missing) pada dataset ini.
+
+
+
+|Kolom | Deskripsi |
+|---- | ---- |
+| Hotel  | Tipe hotel ( "City Hotel" atau "Resort Hotel")|
+| is_canceled| Status pembatalan pemesanan (0 = tidak dibatalkan, 1 = dibatalkan)|
+| lead_time|Jumlah hari antara waktu pemesanan dan tanggal check-in|
+| arrival_date_year  | Tahun dari tanggal kedatangan |
+| arrival_date_month| Bulan dari tanggal kedatangan|
+| arrival_date_week_number | pada minggu ke berapa tamu akan tiba di hotel|
+| arrival_date_day_of_month| Hari dalam bulan untuk tanggal kedatangan|
+| stays_in_weekend_nights | Jumlah malam menginap pada akhir pekan (Sabtu-Minggu)|
+| stays_in_week_nights | Jumlah malam menginap pada hari kerja (Senin-Jumat)|
+| adults | Jumlah orang dewasa yang terdaftar dalam pemesanan|
+| children| Jumlah anak-anak yang terdaftar dalam pemesanan|
+| babies|Jumlah bayi yang terdaftar dalam pemesanan|
+| meal  | Tipe paket makanan yang dipesan (misalnya: "BB" = Bed & Breakfast, "FB" = Full Board)|
+| country| Kode negara asal pelanggan berdasarkan standar ISO 3166-1 Alpha-3|
+| market_segment |Segmen pasar pemesanan (misalnya: "Direct", "Corporate", "Online TA")|
+| distribution_channel| Saluran distribusi pemesanan (misalnya: "Direct", "Corporate", "TA/TO")|
+| is_repeated_guest | Indikator apakah tamu adalah pelanggan yang menginap berulang (0 = baru, 1 = berulang)|
+| previous_cancellations | Jumlah pembatalan sebelumnya yang dilakukan oleh pelanggan|
+| previous_bookings_not_canceled | Jumlah pemesanan sebelumnya yang tidak dibatalkan oleh pelanggan|
+| reserved_room_type| Tipe kamar yang awalnya dipesan oleh pelanggan|
+| assigned_room_type| Tipe kamar yang sebenarnya diberikan kepada pelanggan|
+| booking_changes  | Jumlah perubahan pemesanan yang dilakukan oleh pelanggan |
+| deposit_type| Jenis deposit yang dilakukan (misalnya: "No Deposit", "Refundable", "Non Refund")|
+| agent |ID agen yang mengatur pemesanan (nilai "NULL" jika tidak ada agen)|
+| company|ID perusahaan yang mengatur pemesanan (nilai "NULL" jika tidak ada perusahaan)|
+| days_in_waiting_list | Jumlah hari pemesanan berada dalam daftar tunggu sebelum dikonfirmasi|
+| customer_type | Tipe pelanggan berdasarkan perilaku pemesanan (misalnya: "Transient", "Contract")|
+| adr | *Average Daily Rate* (ADR) atau rata-rata pendapatan per kamar per malam yang dipesan|
+| required_car_parking_spaces| Jumlah tempat parkir mobil yang diperlukan oleh pelanggan|
+| total_of_special_requests|Jumlah permintaan khusus yang dibuat oleh pelanggan|
+| reservation_status| Status pemesanan terakhir (misalnya: "Check-Out", "Canceled")|
+| reservation_status_date| Tanggal dari status terakhir pemesanan|
+
+Dari eksplorasi tersebut, kita mendapatkan beberapa keterangan yang menunjukkan anomali data, seperti adanya nilai negatif pada kolom ADR, kemudian adanya missing values, tipe data yang tidak sesuai, yang bisa dihandle pada bagian data cleaning.
+
+Data Cleaning
+
+ Handle Missing Values
+Pada bagian data cleaning, kita akan menghandle missing values dengan mengisi kolomnya ataupun dengan menghapus data yang ada berdasarkan informasi yang diterima.
+- Missing values pada kolom children akan didrop karena tidak ada keterangan mengenai missing values tersebut dan missing valuesnya hanya 0,003% dari keseluruhan data.
+- Missing values pada kolom country juga akan didrop karena tidak ada keterangan mengenai data yang missing tersebut, sehingga apabila diisi dikhawatirkan akan menimbulkan bias pada data.
+- Missing values pada kolom agent kita isi dengan 0, yang artinya orang tersebut memesan kamar tidak melalui agen. Hal ini didasari oleh informasi pada sumber [https://www.sciencedirect.com/science/article/pii/S2352340918315191](https://www.sciencedirect.com/science/article/pii/S2352340918315191).
+- Berdasarkan sumber yang sama dengan yang di atas, missing values pada kolom company kita isi juga missing valuesnya dengan 0, yang artinya tamu tersebut tidak berkaitan dengan suatu perusahaan tertentu
+
+Data Correction
+
+Pada bagian ini, kita memperbaiki tipe data yang tidak sesuai dan mengubah isi kolom yang tidak sesuai berdasarkan informasi atau pengetahuan yang dimiliki.
+- Mengubah tipe kolom reservation_status_date dari object menjadi datetime
+- Mengubah tipe kolom children dari float menjadi integer karena kolom tersebut menunjukkan banyak anak yang akan menginap, sehingga tidak mungkin nilainya berupa desimal.
+- Mengubah isi ‘Undefined’ pada kolom meal dengan SC, karena berdasarkan sumber [https://www.sciencedirect.com/science/article/pii/S2352340918315191](https://www.sciencedirect.com/science/article/pii/S2352340918315191), Undefined di sini sama dengan tamu tersebut tidak memesan paket makan (SC)
+- Menghapus data dengan isi ‘Undefined’ pada kolom distribution_channel karena tidak ada sumber yang menerangkan maksud dari Undefined pada kolom ini. Di samping itu, persentase jumlah data yang memiliki isi Undefined juga sangat kecil, sehingga data tersebut kita drop.
+Duplicate
+
+Pada bagian ini, kita akan mengecek apakah terdapat data duplikat di dataset kita. Ternyata setelah dicek, terdapat data duplikat, sehingga data duplikat tersebut akan kita drop.
+
+Anomaly Data
+
+Pada bagian ini, kita akan meng-handle data-data yang tidak logis atau anomali.
+- Terdapat nilai negatif pada kolom ADR, dimana ADR adalah rata-rata harga per kamar per hari yang tidak mungkin negatif. Dengan demikian, data dengan nilai negatif pada kolom ADR kita drop.
+- Nilai 0 pada kolom adults artinya tidak ada orang dewasa yang ikut menginap, dimana menurut regulasi secara umum, yang boleh reservasi ataupun check-in hanyalah orang dewasa yang berumur 17 atau 18 tahun, sehingga kasus ini tidak mungkin terjadi. Jadi, data yang memiliki nilai 0 pada kolom adults kita drop.
+- Nilai yang lebih besar dari 365 hari pada kolom lead_time, yang artinya jarak antara waktu booking dengan waktu kedatangan lebih dari 1 tahun. Secara umum, hotel memperbolehkan pelanggan untuk membooking hotel maksimal dari 1 tahun sebelumnya. Dengan demikian, nilai lead_time yang lebih besar dari 365 hari akan didrop.
+- Nilai ADR 0 pada segmen pasar selain complementary artinya ada segmen pasar lainnya selain orang-orang yang ditunjuk sebagai promotor yang tidak membayar kamar hotel, dimana ini adalah anomali, sehingga data yang memiliki ADR 0 pada segmen pasar selain complementary akan kita drop.
+
+Outliers
+Pengecekan outliers dilakukan untuk kolom numerik. Pada bagian ini, kita akan drop data yang merupakan outliers ekstrem, seperti pada kolom ADR yang bernilai lebih dari 5000, kolom children dan babies yang nilainya lebih dari 7, dan kolom requires_car_parking_spaces yang lebih dari 7.
+
+EDA
+
+EDA pada proyek ini difokuskan untuk melakukan Diagnostic Analysis dimana kita akan menganalisa faktor-faktor, behaviour pelanggan, serta pola yang mempengaruhi pembatalan pemesanan hotel terhadap kolom `is_canceled` sebagai variabel target. Analisis ini membantu kita dalam mengidentifikasi insight penting yang nantinya menjadi dasar untuk melakukan pembangunan model Machine Learning menjadi lebih akurat. Berikut pendekatan analisa yang akan kita lakukan.
+
+Kita cek persentase jumlah kolom target. Diperoleh bahwa data target imbalanced karena persentase jumlah data target atas tamu yang tidak membatalkan pesanan sebesar 72,3% dan yang membatalkan pesanan sebesar 27,7%.
+Kita analisis behaviour tamu
+- Keputusan pembatalan pelanggan berdasarkan tipe hotel
+
+Berdasarkan grafik di atas, pada City Hotel presentase pembatalan yang dilakukan oleh tamu lebih tinggi dibandingkan dengan presentase pembatalan pada Resort Hotel
+
+- Keputusan pembatalan pelanggan berdasarkan bulan kedatangan
+
+Selama periode Juli 2015- Agustus 2017 Total reservasi tertinggi terjadi pada bulan Juli dan Agustus, yang mana pada bulan-bulan tersebut masuk pada musim panas
+
+- Keputusan pembatalan pelanggan berdasarkan pilihan paket makan
+
+
+Paket makan SC memiliki tingkat pembatalan tertinggi yaitu sebesar 35%. Paket makan BB, FB, HB cenderung lebih stabil dengan pembatalan di bawah 30%. Tamu yang tidak memilih paket makan (SC) kemungkinan mengalami ketidakpastian dalam perencanaan.
+
+- Keputusan pembatalan pelanggan berdasarkan Segmen Pasar
+ 
+Market segment Online TA memiliki tingkat pembatalan tertinggi sebesar 35.6%, diikuti oleh Groups (26.6%) dan Aviation (19.8%). Hal ini menunjukkan bahwa tamu yang memesan melalui agen perjalanan online lebih cenderung sering melakukan pembatalan dibandingkan segmen lainnya. Kemungkinan penyebabnya adalah fleksibilitas pembatalan, kemudian pada segmentasi Groups mungkin dipengaruhi oleh perubahan jadwal acara, dan Aviation bisa terkait dengan perubahan jadwal penerbangan.
+
+- Keputusan pembatalan pelanggan berdasarkan saluran pemesanan
+
+
+Tamu yang melakukan pemesanan melalui agen perjalanan (TA/TO) memiliki tingkat pembatalan tertinggi (31.2%) dibandingkan dengan saluran distribusi lainnya. kemungkinan hal ini disebabkan oleh kebiasaan pelanggan yang lebih cenderung membandingkan opsi lain sebelum mengonfirmasi pemesanan. sedangkan, pemesanan langsung (14.9%), corporate (13.1%), dan GDS (20.3%) memiliki tingkat pembatalan lebih rendah.
+
+- Keputusan pembatalan pelanggan berdasarkan tipe pembayaran deposit
+
+
+Tamu yang memilih tipe No Deposit memiliki presentase pembatalan sebesar 27%, dan tipe Refundalbe memiliki presentase pembatalan sebesar 24%. tipe Non-Refundable seharusnya mengurangi pembatalan karena tamu sudah membayar di muka, justru data menunjukkan bahwa 93.8% dari pemesan dengan metode ini tetap melakukan pembatalan.
+
+- Keputusan pembatalan pelanggan berdasarkan status tamu tersebut adalah tamu reguler atau bukan
+
+
+
+Tamu reguler sangat kecil potensinya melakukan pembatalan (hanya 8%) sedangkan tamu-tamu baru yang bukan tamu reguler memiliki potensi pembatalan sebesar 28%.
+
+- Keputusan pembatalan pelanggan berdasarkan tipe pelanggan
+
+
+Tipe pelanggan Transient memiliki tingkat pembatalan paling tinggi yaitu sebesar 30,3%, sedangkan untuk tipe customer Group (7%) dan Contract (16%) lebih jarang membatalkan. Pelanggan Transient lebih fleksibel dalam membatalkan dibanding Contract atau Group.
+
+- Keputusan pembatalan pelanggan berdasarkan kebutuhan jumlah space parkir
+
+
+
+Berdasarkan permintaan parking space, sebanyak 30% pembatalan dilakukan oleh tamu yang tidak meminta parking space, sedangkan tamu yang meminta parking space mereka adalah tamu yang tidak pernah melakukan pembatalan pemesanan.
+
+- Keputusan pembatalan pelanggan berdasarkan total permintaan khusus
+
+
+
+Tamu-tamu yang memiliki permintaan khusus memiliki komitmen tinggi dengan pesanannya.  Terbukti bahwa semakin banyak permintaan khusus, pembatalan yang terjadi semakin sedikit.
+
+- Keputusan pembatalan pelanggan berdasarkan menginap bersama anak atau tidak
+
+Untuk menganalisis ini, kita membuat satu kolom baru yang menunjukkan apakah mereka datang bersama anak atau tidak, dengan jika ada minimal 1 bayi dan/atau 1 anak-anak, maka mereka membawa anak. Jika jumlah bayi dan anak-anaknya keduanya nol, artinya mereka tidak membawa anak.
+
+
+
+Presentase tamu yang membawa anak (has_children = 1) cenderung lebih tinggi untuk melakukan pembatalan pemesanan yaitu sebesar 34.5%, dibandingkan dengan tamu yang tidak membawa anak (has_children = 0) dengan presentase pembatalan sebesar 27%.
+
+- Keputusan pembatalan pelanggan berdasarkan perubahan pada pemesanan
+
+Untuk menganalisis hal ini, kita buat kategori sebagai berikut.
+- Tidak ada perubahan artinya nilai booking_changes = 0
+- Jarang melakukan perubahan untuk nilai booking_changes = 1 sampai 2
+- Frekuensi melakukan perubahan sedang untuk nilai booking_changes = 3 sampai 5
+- Sering melakukan perubahan untuk nilai booking_changes = 6 sampai 10
+- Sangat sering melakukan perubahan untuk nilai booking_changes lebih dari 10
+
+ 
+
+Semakin sedikit perubahan pada pemesanan maka semakin tinggi presentase pembatalannya
+
+- Keputusan pembatalan pelanggan berdasarkan pernah tidaknya pelanggan membatalkan pesanan sebelumnya
+
+Untuk menganalisis hal ini, kita akan menambah kolom baru yang menunjukkan apakah pelanggan tersebut sebelumnya pernah membatalkan pesanan atau tidak dengan :
+- 1 : pelanggan pernah membatalkan pemesanan
+- 0 : pelanggan belum pernah membatalkan pemesanan
+Pelanggan yang pernah membatalkan pemesanan, nilai pada kolom previous_cancellations akan lebih dari 0, sedangkan yang belum pernah membatalkan pemesanan, nilai pada kolom previous_cancellations akan sama dengan 0.
+
+
+Tamu yang sebelumnya pernah melakukan pembatalan pemesanan cenderung lebih tinggi persentase tingkat pembatalannya yaitu sebesar 67.9% dibandingkan dengan tamu yang belum pernah melakukan pembatalan pemesanan pada pemesanan sebelumnya yang mana tingkat pembatalannya hanya sebesar 27%.
+
+- Keputusan pembatalan pelanggan berdasarkan lama waktu menginap di hari Senin-Jumat
+
+
+
+Median lama waktu menginap di antara hari Senin-Jumat untuk tamu yang membatalkan pemesanannya  lebih tinggi daripada median lama waktu menginap untuk tamu yang tidak membatalkan pemesanannya. Mayoritas tamu yang membatalkan pemesanannya adalah yang lama waktu menginapnya 3 malam, sedangkan yang tidak membatalkan pemesanannya adalah yang lama waktu menginapnya hanya 2 malam.
+
+- Keputusan pembatalan pelanggan berdasarkan jarak waktu pemesanan hingga tanggal kedatangan
+
+
+
+- Tamu yang melakukan pembatalan pemesanan adalah mayotitas mereka adalah yang jarak waktu pemesanan sampai waktu kedatangan adalah 79 hari.
+- Tamu yang tidak melakukan pembatalan pemesanan mayoritas mereka adalah yang jarak waktu pemesanan sampai waktu kedatangan adalah 38 hari.
+
+- Keputusan pembatalan pelanggan berdasarkan ADR (harga rata-rata per kamar per hari)
+
+
+
+- Tamu yang melakukan pembatalan pemesanan mayoritas dari mereka adalah yang harga kamarnya 110 Euro
+- Tamu yang tidak melakukan pembatalan pemesanan mayoritas dari mereka adalah yang harga kamarnya adalah 95 Euro
+Tamu yang melakukan pembatalan pemesanan memiliki median ADR yang lebih tinggi dari pada tamu yang melakukan pembatalan
+
+- Keputusan pembatalan pelanggan berdasarkan asal negara
+
+Untuk menganalisis hal ini, kita akan membuat satu kolom baru yang menunjukkan apakah tamu ini berasal dari dalam negeri, artinya berasal dari Portugal, ataukah berasal dari luar negeri atau berasal dari luar Portugal. Kolom tersebut kita namakan is_local. Isi dari kolom is_local adalah :
+- 1 : tamu berasal Portugal (dari dalam negeri)
+- 0 : tamu berasal dari luar Portugal (dari luar negeri)
+
+
+Dari pie chart di atas, diperoleh tamu yang berasal dari Portugal lebih banyak daripada tamu yang berasal dari luar Portugal
+
+Membangun Model
+
+Data Correlation and Features Selection
+Setiap hubungan baik data kategorik maupun numerik terhadap kolom target (is_canceled). Pada kolom numerik menggunakan heatmap terhadap kolom is_canceled. Sedangkan untuk kolom kategorik menggunakan metode chi-square dimana bila p-value < 0.05 maka kolom tersebut memiliki pengaruh terhadap kolom is_canceled.
+Korelasi pada kolom numerik terhadap kolom target.
+
+Diperoleh kolom numerik yang akan dijadikan feature adalah :
+
+1. required_car_parking_spaces
+2. is_local
+3. total_of_special_requests
+4. cancellations_before
+5. adr
+6. lead_time
+
+Hal ini dikarenakan nilai korelasi untuk fitur-fitur tersebut dengan kolom target (`is_canceled`) lebih dari 10%
+
+Korelasi kolom kategorik terhadap kolom target
+
+Kolom reserved_room_type akan didrop dari fitur karena hanya menunjukkan jenis kamar yang dipesan, sedangkan assigned_room_type lebih relevan karena mencerminkan jenis kamar yang benar-benar diterima oleh tamu. Oleh karena itu, analisis akan difokuskan pada kamar yang sebenarnya didapatkan
+Kolom company akan didrop dari feature karena sekitar 94% pelanggan adalah yang tidak berkaitan dengan perusahaan tertentu.
+Kolom reservation_status akan didrop dari feature karena kolom ini menggambarkan kolom is_canceled.
+Kolom country akan dihapus karena telah digantikan oleh kolom is_local, yang secara langsung merepresentasikan apakah tamu berasal dari dalam atau luar negeri. Hal ini dilakukan untuk menyederhanakan analisis tanpa kehilangan informasi penting.
+Kolom is_canceled merupakan kolom target, sehingga tidak dijadikan fitur
+
+Kolom-kolom yang bersifat kategorik yang akan dijadikan feature adalah :
+hotel
+arrival_date_month
+meal
+market_segment
+distribution_channel
+assigned_room_type
+deposit_type
+agent
+customer_type
+booking_change_category
+
+Modeling
+Preprocessing
+Pada proses ini, hal yang perlu kita lakukan adalah, 
+Menentukan kolom fitur dan target
+Dimana kolom x adalah fitur, dan kolom y adalah target (is_canceled)
+Split data
+Data dibagi menjadi data train dan terest dengan perbandingan data train dan data test yaitu 80% : 20%.
+Skema Preprocessing
+Pada tahap ini, perlu dilakukannya feature engineering dimana kolom fitur akan dilakukan proses encoding dan scalling bergantung pada tipe kolom fitur tersebut.
+One Hot Encoding
+Kolom yang dilakukan proses dengan OHE adalah kolom 'hotel', 'meal', 'distribution_channel', 'deposit_type', 'customer_type'.
+Binary Encoding
+kolom yang dilakukan proeses Binary Encoding adalah 'market_segment',  'assigned_room_type',  'agent', 'arrival_date_month', 'booking_change_category'
+Robust Scaler
+Kolom yang di
+
+Model
+Pada proyek  ini, kita akan memprediksi seorang tmau akan membatalkan pesanan atau tidak. Maka dari itu, model yang digunakan adalah model klasifikasi.
+Pipeline
+Proses ini dilakukan untuk melihat f2 score jika data tidak diseimbangkan lebih dulu, mengingat data target yang jumlahnya tidak seimbang.
+
+Metode Balancing pada Target
+	Balancing dilakukan untuk menyeimbangkan data target. Metode yang dilakukan seperti gambar dibawah ini. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+		Kemudian model ini juga diproses dengan Pipeline dan memperoleh.
+
+Dari perbandingan model dengan balancing, diperoleh lima model dengan rata-rata F2 score tertinggi, yaitu:
+XG Boost dengan metode balancing Random Under Sampler
+Gradient Boost dengan metode balancing BorderlineSMOTE
+Gradient Boost dengan metode balancing Random Under Sampler
+XG Boost dengan metode balancing Random over Sampler
+Gradient Boost dengan metode balancing ADASYN
+Hyperparameter Tuning
+Model dengan nilai rata-rata F2 score tertinggi yang disebutkan sebelumnya, dilakukan tuning menggunakan RandomizedSearch dan menggunakan Cross Validation. Kemudian diperoleh hasil sebagai berikut.
+
+
+
+
+Prediksi Data Uji
+Dari hasil hyperparameter tuning, dipilih model Gradient Boost dengan metode balancing Border Line Smote karena model tersebut memiliki f2 score tertinggi. Diperoleh f2 score dengan model Gradient Boosting dengan metode Borderline SMOTE tanpa hyperparameter tuning adalah 0,78.
+
+Confusion Matrix
+	
+Model sangat baik dalam mendeteksi pembatalan (F-2 Score tinggi). Cocok untuk kasus di mana gagal mendeteksi pembatalan (FN) lebih rendah nilainya daripada kesalahan memprediksi batal yang tidak terjadi (FP).
+
+
+Limitasi Model
+Model ini terbatas hanya jika informasi yang diketahui adalah : 
+'hotel'
+'lead_time'
+ 'arrival_date_month'
+'meal'
+'market_segment'
+'distribution_channel'
+'cancellations_before'
+'booking_change_category'
+'assigned_room_type'
+'deposit_type'
+'agent'
+ 'customer_type'
+'adr'
+'required_car_parking_spaces'
+'total_of_special_requests'
+'is_local'
+'is_canceled'
+Dengan demikian, untuk memprediksi keputusan pembatalan di luar informasi tersebut, peluang akurasi terhadap prediksi tidak akurat akan lebih besar.
+
+Data targetnya tidak seimbang. Data tamu yang membatalkan lebih sedikit daripada tamu yang tidak membatalkan
+
+Karena keterbatasan waktu, model yang diuji coba terbatas, yaitu 
+DecisionTree,
+KNN,
+Logistic Regression
+Naive Beiyes
+Hard Vote
+Stacking
+Random Forest
+Adaboost
+Bagging
+XG Boost
+Gradient Boost
+
+Karena keterbatasan waktu, metode hyperparameter tuning yang dapat digunakan adalah randomized search
+
+Features Importance
+Diperoleh fitur-fitur yang paling berpengaruh terhadap model adalah :
+required_car_parking_spaces
+market_segment
+is_local
+agent
+customer_type
+total_of_special_requests
+distribution_channel
+lead_time
+
+
+Model Impact
+Dengan model ini, pihak manajemen mampu mengetahui prediksi tamu-tamu yang berpotensi untuk melakukan pembatalan. Selain itu, pihak manajemen juga akan mengetahui pelanggan mana yang berpotensi untuk tetap melanjutkan pesanannya sehingga pihak manajemen dapat melakukan strategi yang lebih efektif untuk mengatasi demand di hotel mereka.
+
+
+
+
+
+
+
+
+Kesimpulan
+Pelanggan akan cenderung membatalkan pemesanannya jika:
+- jarak antara waktu pemesanan dengan waktu kedatangan relatif lama
+- harga kamarnya relatif mahal
+- pelanggan tersebut berasal dari dalam negeri (dari Portugal)
+- pelanggan akan datang pada musim panas (Juni-Agustus)
+- pelanggan memesan melalui agen perjalanan online
+- pelanggan merupakan pelanggan baru di hotel tersebut
+- pelanggan bepergian sendiri, bukan merupakan bagian dari grup ataupun perusahaan
+- pelanggan tidak membutuhkan space parkir
+- pelanggan tidak memiliki permintaan khusus
+- pelanggan tidak memesan paket makan
+- pelanggan membawa anak untuk menginap di hotel tersebut
+- pelanggan sedikit atau bahkan tidak melakukan perubahan pada pemesanannya
+- pelanggan memiliki riwayat membatalkan pemesanan di hotel tersebut sebelumnya
+- pelanggan memesan kamar untuk tinggal pada rentang hari Senin-Jumat dalam waktu yang panjang
+
+Faktor-faktor yang berpengaruh terhadap keputusan pembatalan pemesanan kamar hotel adalah:
+- Kebutuhan space parkir
+- jarak antara waktu pemesanan dengan waktu kedatangan (lead time)
+- ADR (harga rata-rata per kamar per hari)
+- negara asal pelanggan
+- bulan kedatangan
+- apakah menginap bersama anak atau tidak
+- merupakan tamu reguler di hotel tersebut atau tidak
+- tipe pelanggan yang bepergian (grup, sendiri, dll)
+- saluran pemesanan yang digunakan oleh pelanggan
+
+Dari hasil membangun model, diperoleh model yang paling baik adalah XG Boost dengan dilakukan balancing menggunakan metode Random Under Sampler, juga dilakukan hyperparameter tuning. Hal ini terlihat dari nilai F2 Score yang paling tinggi daripada model lainnya, yaitu sebesar 0,786.
+
+Model ini dapat diaplikasikan oleh pihak manajemen hotel karena setelah dilakukan tes ke data uji, nilai F2 Score tidak berbeda jauh dengan saat dilakukan tes ke data latih, yaitu sebesar 0,787. Hanya saja, model ini baik diaplikasikan jika terdapat informasi berikut.
+- 'hotel'
+- 'lead_time'
+- 'arrival_date_month'
+- 'meal'
+- 'market_segment'
+- 'distribution_channel'
+- 'cancellations_before'
+- 'booking_change_category'
+- 'assigned_room_type'
+- 'deposit_type'
+- 'agent'
+- 'customer_type'
+- 'adr'
+- 'required_car_parking_spaces'
+- 'total_of_special_requests'
+- 'is_local'
+- 'is_canceled'
+
+
+Saran Dan Rekomendasi
+Saran
+
+Berdasarkan analisis, diperoleh bahwa pelanggan cenderung membatalkan pemesanannya jika jarak antara waktu pemesanan dengan waktu kedatangan relatif lama. Mayoritas pelanggan yang membatalkan pesanannya memiliki jarak waktu pemesanan dengan waktu kedatangan sebesar 79 hari, sedangkan mayoritas pelanggan yang tidak membatalkan pemesanannya memiliki jarak waktu pemesanan dengan waktu kedatangan sebesar 38 hari. Dari data ini, pihak manajemen hotel dapat membatasi waktu pemesanannya, yaitu maksimal 40 hari sebelum waktu kedatangan.
+
+Berdasarkan analisis, diperoleh bahwa pelanggan cenderung membatalkan pemesanannya jika harga kamarnya relatif tinggi. Mayoritas pelanggan yang membatalkan pemesanannya adalah yang mendapatkan harga kamar 110 Euro, sedangkan mayoritas pelanggan yang tidak membatalkan pemesanannya adalah yang harga kamarnya 95 Euro. Dari hasil analisis ini, pihak manajemen hotel dapat mempertimbangkan rate harga kamar atau memberikan diskon.
+
+Berdasarkan analisis, pelanggan yang cenderung membatalkan pemesanan adalah pelanggan baru atau bukan pelanggan reguler, sehingga pihak manajemen hotel dapat mempertimbangkan untuk membuat member bagi para pelanggan reguler, dimana mereka akan mendapatkan harga kamar yang lebih menarik dan promosi khusus, sehingga pelanggan baru dapat tertarik untuk menjadi member hotel tersebut.
+
+Berdasarkan analisis, pelanggan yang cenderung membatalkan pemesanan kamarnya adalah pelanggan yang membawa anak. Pihak manajemen hotel dapat mempertimbangkan untuk membuat fasilitas yang ramah anak, seperti adanya tempat bermain anak-anak, kolam renang yang aman untuk anak-anak, makanan yang sesuai dengan mayoritas lidah anak-anak, sehingga para orangtua yang ingin membawa anaknya menginap dapat merasa aman dan nyaman untuk menginap di hotel tersebut bersama anak mereka, juga anak-anak akan lebih tertarik untuk menginap di hotel tersebut. Karena bisa jadi, tempat menginap adalah pilihan dari anak-anak mereka.
+
+Berdasarkan analisis, musim yang paling ramai pelanggan adalah pada musim panas, yaitu pada bulan Juni hingga Agustus, sehingga pihak manajemen hotel dapat memberikan promosi khusus untuk menginap di hotel tersebut saat musim panas, seperti harga yang lebih murah atau mendapatkan fasilitas tambahan secara gratis, seperti fasilitas breakfast.
+
+Berdasarkan analisis, pelanggan akan cenderung membatalkan pesanan jika menginap di rentang hari Senin-Jumat dalam waktu yang relatif panjang. Pelanggan yang membatalkan pesanannya untuk menginap di rentang hari Senin-Jumat mayoritas yang memesan untuk menginap selama 3 malam, sedangkan pelanggan yang tidak membatalkan pesanannya mayoritas yang memesan untuk menginap selama 2 hari. Pihak manajemen hotel dapat mempertimbangkan untuk memberikan harga khusus jika menginap 3 hari atau lebih di rentang hari Senin-Jumat, namun dengan adanya deposit di awal dan terdapat cancellation fee.
+
+Berdasarkan analisis, pelanggan akan cenderung membatalkan pesanan jika memesan kamar melalui agen perjalanan online. Pihak manajemen hotel dapat menerapkan kebijakan cancellation fee yang lebih tinggi jika pelanggan memesan kamar melalui agen perjalanan online.
+
+
+
+
+
+
+Rekomendasi
+Rekomendasi ini bertujuan untuk meningkatkan keakurasian dan ketepatan model dalam memprediksi pembatalan pemesanan, serta mengurangi kesalahan prediksi yang dapat berdampak pada pengambilan keputusan bisnis.
+Mencoba algoritma boosting lain yang belum digunakan untuk melihat apakah dapat meningkatkan performa model.
+Menambah jumlah data, terutama untuk kategori canceled, agar model memiliki lebih banyak informasi dan dapat membuat prediksi yang lebih akurat.
+Menganalisis data yang masih salah diprediksi, terutama False Positive dan False Negative, untuk memahami pola kesalahan dan mencari cara memperbaikinya.
+Menggunakan data yang lebih baru agar dapat lebih menggambarkan situasi dan kondisi saat ini.
+
+
+
+
+
+
+
+
+
